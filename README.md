@@ -1,4 +1,4 @@
-# 4dof Robot Arm using Inverse Kinematic
+4dof Robot Arm using Inverse Kinematic
 
 ## Overview
 
@@ -7,23 +7,23 @@
 ## Before and after
 
 Noted that this robot went through a modification from using sg90 micro servo as the elbow to using mg995.
+<img src="https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/ba028357-59e8-4c9b-ba7f-f2440c37741f" width="300" height="300" /><img src="https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/4024afd6-ecef-44af-809b-1cdcd4cd0911" width="300" height="300" />
 
-<img src="https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/ba028357-59e8-4c9b-ba7f-f2440c37741f" width="300" height="300" />
-<img src="https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/3dfeb183-0df6-46e1-96cc-723ce5584908" width="300" height="300" />
-
----
-
-#####
+----------
 
 ## Code we will be using to learn :
 
-` float theta1 = atan2(y, x);
- float theta1deg = degrees(theta1);
- float p = x / cos(theta1);
- float d = sqrt(pow(p, 2) + pow(z, 2));
- float theta2 = acos((pow(L1, 2) + pow(d, 2) - pow(L2, 2)) / (2 * L1 * d)) + atan2(z, p);
- float theta2deg = degrees(theta2);
- float theta3 = acos((pow(L1, 2) + pow(L2, 2) - pow(d, 2)) / (2 * L1 * L2));
- float theta3deg = 180 - degrees(theta3);
- servo1.write(theta2deg);
- servo2.write(theta3deg);`
+    float theta1 = atan2(y, x);
+    float theta1deg = degrees(theta1);
+    float p = x / cos(theta1); float d = sqrt(pow(p, 2) + pow(z, 2));
+    float theta2 = acos((pow(L1, 2) + pow(d, 2) - pow(L2, 2)) / (2 * L1 * d)) + atan2(z, p);
+    float theta2deg = degrees(theta2); float theta3 = acos((pow(L1, 2) + pow(L2, 2) - pow(d, 2)) / (2 * L1 * L2));
+    float theta3deg = 180 - degrees(theta3);
+    servo0.write(theta1deg);
+    servo1.write(theta2deg);
+    servo2.write(theta3deg);
+we will convert these code to math expression with pictures for the ease of understanding.
+
+### 4dof Robot Arm :
+
+$\theta_1 = \tan^{-1} \left(\frac{y}{x}\right)$
