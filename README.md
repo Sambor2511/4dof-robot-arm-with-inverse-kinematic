@@ -9,7 +9,7 @@
 Noted that this robot went through a modification from using sg90 micro servo as the elbow to using mg995.
 
 <img src="https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/ba028357-59e8-4c9b-ba7f-f2440c37741f" width="300" height="300" />
-<img src="https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/4024afd6-ecef-44af-809b-1cdcd4cd0911
+<img src="https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/3dfeb183-0df6-46e1-96cc-723ce5584908
 " width="300" height="300" />
 
 ---
