@@ -9,16 +9,12 @@ Servo servo2;
 Servo servo3;
 Servo servo4;
 ezButton button(2);
+
 // Define lengths of the robot arm segments
 const float L1 = 10;
 const float L2 = 8.9;
 const float L3 = 12.8;
-// const float L0 = 10.3;
 
-// Define the desired end-effector position
-// const float x = 2.0;
-// const float y = 2.0;
-// const float z = 3.0 - L0;
 
 void setup() {
   pinMode(Xaxis_pin, INPUT);
@@ -54,7 +50,6 @@ void loop() {
   int pot = analogRead(A3);
   int status = analogRead(A5);
   int angle = 180 - map(pot, 0, 1023, 0, 180);
-  // motion();
   if (xread > 890) {
     if (x1 < 17) {
       x1 += 0.6;
@@ -89,11 +84,9 @@ void loop() {
     if (btnstate == false) {
       servo4.write(180);
       btnstate = true;
-      // kinematic(x1, 0, y1);
     } else {
       servo4.write(0);
       btnstate = false;
-      // kinematic(x1, 0, y1);
     }
   } else if (button.isReleased()) {
     timestate = false;
@@ -115,20 +108,12 @@ void loop() {
 
 
 void kinematic(float x, float y, float z) {
-  // Calculate the coxa angle
   float theta1 = atan2(y, x);
   float theta1deg = degrees(theta1);
-  // float xb=x-(L1 * cos(theta1));
   float p = x / cos(theta1);
-  // Project the target point onto the plane formed by femur and tibia
-  // float d = sqrt(pow(x - L1 * cos(theta1), 2) + pow(y - L1 * sin(theta1), 2) + pow(z, 2));
   float d = sqrt(pow(p, 2) + pow(z, 2));
-
-  // Calculate the femur angle using law of cosines
   float theta2 = acos((pow(L1, 2) + pow(d, 2) - pow(L2, 2)) / (2 * L1 * d)) + atan2(z, p);
   float theta2deg = degrees(theta2);
-
-  // Calculate the tibia angle also using law of cosines
   float theta3 = acos((pow(L1, 2) + pow(L2, 2) - pow(d, 2)) / (2 * L1 * L2));
   float theta3deg = 180 - degrees(theta3);
   servo1.write(theta2deg);
@@ -141,15 +126,6 @@ void kinematic(float x, float y, float z) {
     float offsetangle = (90 - (theta2deg - theta3deg)) + 30;
     servo3.write(offsetangle);
   }
-  // Serial.println("--------------");
-  // Serial.println(theta1deg);
-  // Serial.println(theta2deg);
-  // Serial.println(theta3deg);
-  // Serial.println(offsetangle);
-  // Serial.println("--------------");
-  // Move servos to calculated positions
-
-  // servo4.write();  // Assuming no rotation for the fourth joint
 }
 
 void motion() {
