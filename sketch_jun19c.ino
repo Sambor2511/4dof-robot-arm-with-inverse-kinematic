@@ -54,31 +54,32 @@ void loop() {
   int pot = analogRead(A3);
   int status = analogRead(A5);
   int angle = 180 - map(pot, 0, 1023, 0, 180);
+  // motion();
   if (xread > 890) {
     if (x1 < 17) {
-      x1 += 1;
+      x1 += 0.6;
     }
     kinematic(x1, 0, y1);
-    delay(100);
+    delay(50);
   } else if (xread < 200) {
     if (x1 > 0) {
-      x1 -= 1;
+      x1 -= 0.6;
     }
     kinematic(x1, 0, y1);
-    delay(100);
+    delay(50);
   }
   if (yread > 890) {
     if (y1 > -8) {
-      y1 -= 1;
+      y1 -= 0.6;
     }
     kinematic(x1, 0, y1);
-    delay(100);
+    delay(50);
   } else if (yread < 200) {
     if (y1 < 8) {
-      y1 += 1;
+      y1 += 0.6;
     }
     kinematic(x1, 0, y1);
-    delay(100);
+    delay(50);
   }
   if (button.isPressed()) {
     if (timestate == false) {
@@ -139,7 +140,7 @@ void kinematic(float x, float y, float z) {
   } else {
     float offsetangle = (90 - (theta2deg - theta3deg)) + 30;
     servo3.write(offsetangle);
-  } 
+  }
   // Serial.println("--------------");
   // Serial.println(theta1deg);
   // Serial.println(theta2deg);
@@ -149,4 +150,24 @@ void kinematic(float x, float y, float z) {
   // Move servos to calculated positions
 
   // servo4.write();  // Assuming no rotation for the fourth joint
+}
+
+void motion() {
+  servo4.write(0);
+  servo0.write(160);
+  delay(700);
+  
+  kinematic(12, 0, -1);
+  delay(700);
+  servo4.write(180);
+  delay(700);
+  kinematic(12, 0, 7);
+  delay(700);
+  servo0.write(120);
+  delay(700);
+  kinematic(8, 0, -1);
+  delay(700);
+  servo4.write(0);
+  delay(700);
+  kinematic(12, 0, 7);
 }
