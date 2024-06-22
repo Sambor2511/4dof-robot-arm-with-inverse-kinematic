@@ -64,6 +64,7 @@ $\alpha_1 = \frac{L1^2 + d^2 - L2^2}{2 * L1 * d}$
 since ${d}$ is not yet known, we can find it using the pythagorean theorem
 
 $d = \sqrt{P^2 + z^2}$
+
 $z$ is the distance from the ground to the end of the $2^{nd}$ link
 now that we have found $d$ we can calculate $\alpha1$ but we are still missing $\alpha2$.
 as the picture above we can see that $\alpha2$ is in a right triangle therefore we can use tangent and the inverse tangent.
