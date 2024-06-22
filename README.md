@@ -1,3 +1,4 @@
+
 4dof Robot Arm using Inverse Kinematic
 
 ## Overview
@@ -15,7 +16,8 @@ Noted that this robot went through a modification from using sg90 micro servo as
 
     float theta1 = atan2(y, x);
     float theta1deg = degrees(theta1);
-    float p = x / cos(theta1); float d = sqrt(pow(p, 2) + pow(z, 2));
+    float p = x / cos(theta1);
+    float d = sqrt(pow(p, 2) + pow(z, 2));
     float theta2 = acos((pow(L1, 2) + pow(d, 2) - pow(L2, 2)) / (2 * L1 * d)) + atan2(z, p);
     float theta2deg = degrees(theta2); float theta3 = acos((pow(L1, 2) + pow(L2, 2) - pow(d, 2)) / (2 * L1 * L2));
     float theta3deg = 180 - degrees(theta3);
@@ -25,6 +27,44 @@ Noted that this robot went through a modification from using sg90 micro servo as
 we will convert these code to math expression with pictures for the ease of understanding.
 
 ### 4dof Robot Arm :
-![image](https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/6925e5f8-e4cf-43c5-b900-2fa6e7c4b47d)
+Top View
+![image](https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/ee3b468b-535a-4f70-b117-d38450197b69)
 
-$\theta_1 = \tan^{-1} \left(\frac{y}{x}\right)$
+$\theta_1 = \tan^{-1} \left(\frac{y}{x}\right)$ this find the angle of $\theta_1$ in radian using the inverse of tangent.
+
+$\theta_1 *\frac{180}{PI} = \theta_1$ in degrees
+
+now that we got $\theta_1$ in degree we need to find the length of $P$
+
+$\cos \theta_1= \frac{P}{x} \Rightarrow P=\cos \theta_1 * x$ 
+
+after finding $\theta_1$ and $P$ we can start finding another another angles such as $\theta_2$, $\theta_3$ and $\theta_4$.
+
+Side view of the robot arm
+![image](https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/c8771a8a-d049-4da6-aa03-4e5b3c681804)
+
+so let start by calculating $\theta_2$
+
+![image](https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/54b7adbb-a3f3-4bb9-9c0f-32c13bb94823)
+
+as shown in the picture above, we can see that the sum of $\theta_2$ is the equivalent to $\alpha_1 + \alpha_2$.
+Since $\alpha_1$ is in a scalene triangle while $\alpha_2$ is in a right triangle, that mean we have to use cosine law to find $\alpha_1$ and pythagorean theorem for $\alpha_2$.
+So here a quick preview of the formula we are going to use:
+![image](https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/053366ce-de35-4c53-98e5-509e09d57dca)
+![image](https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/dd691da8-5429-4a1b-9e1d-7eddf65bdcdd)
+
+
+with the help of these formulas we can apply it to our robot arm as seen from the picture above.
+
+$\alpha_1 = \frac{L1^2 + d^2 - L2^2}{2 * L1 * d}$
+
+since ${d}$ is not yet known, we can find it using the pythagorean theorem
+
+$d = \sqrt{P^2 + z^2}$
+$z$ is the distance from the ground to the end of the $2^{nd}$ link
+now that we have found $d$ we can calculate $\alpha1$ but we are still missing $\alpha2$.
+as the picture above we can see that $\alpha2$ is in a right triangle therefore we can use tangent and the inverse tangent.
+
+$\tan\theta_2 =\frac{P}{z} \Rightarrow \theta_2 = \tan^{-1} \frac{P}{z}$ 
+
+$\theta_2 *\frac{180}{PI} = \theta_2$ in degrees
