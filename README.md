@@ -27,7 +27,9 @@ Noted that this robot went through a modification from using sg90 micro servo as
 we will convert these code to math expression with pictures for the ease of understanding.
 
 ### 4dof Robot Arm :
+
 Top View
+
 ![image](https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/ee3b468b-535a-4f70-b117-d38450197b69)
 
 $\theta_1 = \tan^{-1} \left(\frac{y}{x}\right)$ this find the angle of $\theta_1$ in radian using the inverse of tangent.
@@ -41,6 +43,7 @@ $\cos \theta_1= \frac{P}{x} \Rightarrow P=\cos \theta_1 * x$
 after finding $\theta_1$ and $P$ we can start finding another another angles such as $\theta_2$, $\theta_3$ and $\theta_4$.
 
 Side view of the robot arm
+
 ![image](https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/c8771a8a-d049-4da6-aa03-4e5b3c681804)
 
 so let start by calculating $\theta_2$
