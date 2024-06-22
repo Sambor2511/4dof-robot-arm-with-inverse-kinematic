@@ -25,5 +25,6 @@ Noted that this robot went through a modification from using sg90 micro servo as
 we will convert these code to math expression with pictures for the ease of understanding.
 
 ### 4dof Robot Arm :
+![image](https://github.com/Sambor2511/4dof-robot-arm-with-inverse-kinematic/assets/76769524/6925e5f8-e4cf-43c5-b900-2fa6e7c4b47d)
 
 $\theta_1 = \tan^{-1} \left(\frac{y}{x}\right)$
