@@ -108,12 +108,17 @@ void loop() {
 
 
 void kinematic(float x, float y, float z) {
+  // theta 1
   float theta1 = atan2(y, x);
   float theta1deg = degrees(theta1);
   float p = x / cos(theta1);
+  // theta 2
   float d = sqrt(pow(p, 2) + pow(z, 2));
-  float theta2 = acos((pow(L1, 2) + pow(d, 2) - pow(L2, 2)) / (2 * L1 * d)) + atan2(z, p);
+  float alpha1 = acos((pow(L1, 2) + pow(d, 2) - pow(L2, 2))/ (2 * L1 * d));
+  float alpha2 = atan2(z, p);
+  float theta2 = alpha1+alpha2;
   float theta2deg = degrees(theta2);
+  //theta 3
   float theta3 = acos((pow(L1, 2) + pow(L2, 2) - pow(d, 2)) / (2 * L1 * L2));
   float theta3deg = 180 - degrees(theta3);
   servo1.write(theta2deg);
