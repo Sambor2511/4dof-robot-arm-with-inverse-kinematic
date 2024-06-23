@@ -1,5 +1,4 @@
 
-
 4dof Robot Arm using Inverse Kinematic
 
 ## Overview
@@ -15,16 +14,25 @@ Noted that this robot went through a modification from using sg90 micro servo as
 
 ## Code we will be using to learn :
 
+    // theta 1
     float theta1 = atan2(y, x);
     float theta1deg = degrees(theta1);
     float p = x / cos(theta1);
+    // theta 2
     float d = sqrt(pow(p, 2) + pow(z, 2));
-    float theta2 = acos((pow(L1, 2) + pow(d, 2) - pow(L2, 2)) / (2 * L1 * d)) + atan2(z, p);
-    float theta2deg = degrees(theta2); float theta3 = acos((pow(L1, 2) + pow(L2, 2) - pow(d, 2)) / (2 * L1 * L2));
+    float alpha1 = acos((pow(L1, 2) + pow(d, 2) - pow(L2, 2))/ (2 * L1 * d));
+    float alpha2 = atan2(z, p);
+    float theta2 = alpha1+alpha2;
+    float theta2deg = degrees(theta2);
+    //theta 3
+    float theta3 = acos((pow(L1, 2) + pow(L2, 2) - pow(d, 2)) / (2 * L1 * L2));
     float theta3deg = 180 - degrees(theta3);
+    //theta 4
+    float theta4 = 90 - (theta2deg - theta3deg);
     servo0.write(theta1deg);
     servo1.write(theta2deg);
     servo2.write(theta3deg);
+    servo3.write(theta4);
 we will convert these code to math expression with pictures for the ease of understanding.
 
 ### 4dof Robot Arm :
@@ -87,6 +95,12 @@ as seen in the picture there a angle between L1 and L2 called $\beta$, and in or
 
 ### $\theta_3 = 180 - \beta$
 
-Great!, all that is left is $\theta_4$ which is the angle to make the end effector stay parallel to the x axis.
+Great!, all that is left is $\theta_4$ which is the angle that will make the end effector stay parallel to the x axis.
+We can calculate $\theta_4$ by subtracting $\theta_2$ with $\theta_3$, this operation will give us the angle from $\theta_3$ to the x axis which is the angle for turning $\theta_4$ to be parallel to the x axis. Therefore,
+ 
+### $\theta_4 = \theta_2 - \theta_3$
+
+So that conclude everything, we have found all angle require to turn the end effector to the desired coordinate.
+
 
 
